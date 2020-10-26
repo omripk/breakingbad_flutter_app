@@ -2,6 +2,7 @@ import 'dart:convert';
 // // ignore: avoid_web_libraries_in_flutter
 // import 'dart:html' show HttpStatus;
 import 'package:flutter/material.dart';
+import 'package:flutter_app/screens/charaterDeailScreen.dart';
 import 'package:http/http.dart';
 import '../models/seriesCharacter.dart';
 
@@ -51,6 +52,18 @@ class _SeriesCharactersState extends State<SeriesCharacters> {
     return Scaffold(
         appBar: AppBar(
           title: Text('Breaking Bad'),
+          actions: <Widget>[
+            FlatButton.icon(
+              icon: Icon(Icons.autorenew),
+              label: Text('Random'),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => SeriesCharacterDetail(isRandom: true)));
+              },
+            )
+          ],
         ),
         body: Container(
           decoration: BoxDecoration(
@@ -65,15 +78,26 @@ class _SeriesCharactersState extends State<SeriesCharacters> {
           child: ListView.builder(
             itemCount: characters.length,
             itemBuilder: (context, index) {
-              return ListTile(
-                title: Text(
-                  characters[index].name,
-                  style: TextStyle(
-                      color: Theme.of(context).secondaryHeaderColor,
-                      fontSize: 20.0),
-                ),
-                leading: CircleAvatar(
-                  backgroundImage: NetworkImage(characters[index].img),
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => SeriesCharacterDetail(
+                                characterId: characters[index].id,
+                                isRandom: false,
+                              )));
+                },
+                child: ListTile(
+                  title: Text(
+                    characters[index].name,
+                    style: TextStyle(
+                        color: Theme.of(context).secondaryHeaderColor,
+                        fontSize: 20.0),
+                  ),
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(characters[index].img),
+                  ),
                 ),
               );
             },

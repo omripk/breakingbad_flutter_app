@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color(0xFF67e6dc),
           accentColor: Color(0xFFeb4d4b),
           secondaryHeaderColor: Color(0xFF222f3e),
-          backgroundColor: Color(0xFFfc5c65)),
+          backgroundColor: Colors.tealAccent),
+      // Start screen
       home: SeriesCharacters(),
     );
   }
