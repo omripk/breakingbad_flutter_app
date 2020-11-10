@@ -24,7 +24,6 @@ bool isLoading = false;
 class _DetailState extends State<SeriesCharacterDetail> {
   void getCharacterDetail() async {
     isLoading = false;
-    print("=========> Girdi ${widget.characterId}");
 
     var url;
     if (widget.isRandom) {
@@ -33,7 +32,6 @@ class _DetailState extends State<SeriesCharacterDetail> {
       url = 'https://breakingbadapi.com/api/characters/${widget.characterId}';
     }
 
-    print(url);
     Response response = await get(url);
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
@@ -51,7 +49,6 @@ class _DetailState extends State<SeriesCharacterDetail> {
           character.occupations.add(item);
         }
 
-        print(data);
         isLoading = true;
       });
     }
@@ -102,12 +99,8 @@ class _DetailState extends State<SeriesCharacterDetail> {
                   ),
                   createACard(context, 'Name', character.name),
                   createACard(context, 'Nick Name', character.nickName),
-                  // createACard(
-                  //     context,
-                  //     'Occupations',
-                  //     character.occupations.length > 1
-                  //         ? character.occupations.first
-                  //         : null),
+                  createACardForTexts(
+                      context, 'Occupations', character.occupations),
                   createACard(context, 'Birth Date', character.birthDate),
                   createACard(context, 'Player', character.player),
                   createACard(context, 'Status', character.status),

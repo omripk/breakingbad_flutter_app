@@ -1,6 +1,4 @@
 import 'dart:convert';
-// // ignore: avoid_web_libraries_in_flutter
-// import 'dart:html' show HttpStatus;
 import 'package:flutter/material.dart';
 import 'package:flutter_app/screens/charaterDeailScreen.dart';
 import 'package:http/http.dart';
@@ -15,7 +13,6 @@ var characters = new List<SeriesCharacter>();
 
 class _SeriesCharactersState extends State<SeriesCharacters> {
   void getCharacters() async {
-    print("=========> Girdi");
     Response response = await get('https://breakingbadapi.com/api/characters');
     if (response.statusCode == 200) {
       var data = await jsonDecode(response.body);
